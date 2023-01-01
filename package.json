@@ -29,7 +29,7 @@
     "@types/app-root-dir": "0.1.1",
     "@types/edit-json-file": "1.7.0",
     "@typescript-eslint/eslint-plugin": "5.47.0",
-    "@typescript-eslint/parser": "^.47.0",
+    "@typescript-eslint/parser": "5.47.0",
     "app-root-dir": "1.0.2",
     "edit-json-file": "1.7.0",
     "eslint": "8.30.0",
