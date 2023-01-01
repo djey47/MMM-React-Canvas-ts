@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "init:mmm": "ts-node ./tools/scripts/init-mmm.ts",
-	"lint": "npm run lint:scripts",
-	"lint:scripts": "eslint ./tools/scripts",
-    "test": "jest"
+	  "lint": "npm run lint:scripts",
+	  "lint:scripts": "eslint ./tools/scripts",
+    "test": "jest",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "npx tsc ./src/*.ts --outfile ./MMM-index.js"
   },
   "repository": {
     "type": "git",
