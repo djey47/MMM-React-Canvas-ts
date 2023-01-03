@@ -1,15 +1,23 @@
 {
-  "name": "mmm-react-canvas-ts",
+  "name": "MMM-React-Canvas-ts",
   "version": "0.0.1",
   "description": "MagicMirror2 module template using React library and Typescript",
   "main": "index.js",
   "scripts": {
+    "install": "npm run build-prod",
     "init:mmm": "ts-node ./tools/scripts/init-mmm.ts",
-	  "lint": "npm run lint:scripts",
-	  "lint:scripts": "eslint ./tools/scripts",
+    "lint": "npm run lint:scripts",
+    "lint:scripts": "eslint ./tools/scripts",
     "test": "jest",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "npx tsc ./src/*.ts --outfile ./MMM-index.js"
+    "clean:all": "rm -f MMM-*.js* node_helper.js",
+    "build": "npm run clean:all && npm run build:module && npm run build:helper",
+    "build-prod": "npm run clean:all && npm run build:module-prod && npm run build:helper-prod",
+    "build:module": "webpack --mode=development --config tools/webpack/webpack.config.module.js",
+    "build:module-prod": "webpack --mode=production --config tools/webpack/webpack.config.module.js",
+    "build:helper": "webpack --mode=development --config tools/webpack/webpack.config.helper.js",
+    "build:helper-prod": "webpack --mode=production --config tools/webpack/webpack.config.helper.js",
+    "analyze:module": "npm run build:module && npx webpack-bundle-analyzer stats.json .",
+    "analyze:helper": "npm run build:helper && npx webpack-bundle-analyzer stats.json ."
   },
   "repository": {
     "type": "git",
@@ -28,15 +36,27 @@
   "devDependencies": {
     "@types/app-root-dir": "0.1.1",
     "@types/edit-json-file": "1.7.0",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "app-root-dir": "1.0.2",
+    "css-loader": "6.7.3",
     "edit-json-file": "1.7.0",
     "eslint": "8.30.0",
+    "mini-css-extract-plugin": "2.7.2",
+    "node-sass": "8.0.0",
+    "sass-loader": "13.2.0",
+    "ts-loader": "9.4.2",
     "ts-node": "10.9.1",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "webpack": "5.75.0",
+    "webpack-bundle-analyzer": "4.7.0",
+    "webpack-cli": "5.0.1"
   },
   "dependencies": {
+    "classnames": "2.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }

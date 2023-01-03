@@ -1,5 +1,6 @@
 node_modules/
 MMM-*.js
+MMM-*.js.LICENSE.txt
 node_helper.js
 stats.json
 styles.css
