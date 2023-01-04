@@ -6,12 +6,10 @@
  * TODO class name should be created automatically at init script
  */
 
-.MMMReactCanvasWrapper {
+.mmm-react-canvas-wrapper {
   width: 100%;
 
-  /* stylelint-disable plugin/selector-bem-pattern */
   .red {
     color: red;
   }
-  /* stylelint-enable plugin/selector-bem-pattern */
 }

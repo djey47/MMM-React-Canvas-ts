@@ -1,14 +1,14 @@
-/** @define MainSample */
+/** @define main-sample */
 
 /**
  * MagicMirror
  * Style rules for Main component
  */
 
-.MainSample {
+.main-sample {
   font-weight: bold;
-}
 
-.MainSample__description {
-  font-style: italic;
+  &__description {
+    font-style: italic;
+  }
 }
