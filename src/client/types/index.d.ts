@@ -1,17 +1,35 @@
-/* eslint-disable no-var */
+/**
+ * MM2 internal logger
+ */
+declare const Log: MM2Logger;
 
-declare module 'node_helper';
+/**
+ * MM2 Module helper
+ */
+declare const Module: MM2ModuleHelper;
 
-declare global {
-  /**
-   * MM2 internal logger
-   */
-  var Log: any;
-
-  /**
-   * MM2 Module instance
-   */
-  var Module: any;
+interface MM2Logger {
+  info(message: string): void;
+  error(message: string): void;
 }
 
-export {};
+interface MM2ModuleHelper {
+  register(moduleName: string, moduleImplementation: MM2ModuleImpl): void;
+}
+
+interface MM2ModuleImpl {
+  config?: {
+    debug: boolean;
+  };
+  defaults: object;
+  file?(fileName: string): string;
+  getDom(): HTMLDivElement | undefined;
+  getHeader(): string;
+  getStyles(): string[];
+  loaded?: boolean;
+  name?: string;
+  notificationReceived(notif: string);
+  socketNotificationReceived(notif: string, payload: object);
+  start(): void;
+  viewEngineStarted?: boolean;
+}
