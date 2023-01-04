@@ -26,27 +26,20 @@ to make UI creation lots easier and fun (18.2.0)
 ### Module / helper builds, in development and production
 handled by Webpack: `npm run build` or `npm run build-prod`
 
-### Interactive dependency upgrades
-thanks to *npm-check* module: `npm run upgrade-interactive`
-
 ### Code linting
 provides ESLint, Stylelint checks: `npm run lint`
 
 #### Stylelint checks for BEM syntax
 
-### Unit tests
-with jest runtime: `npm test`, track source changes `npm run jest:watch`
-
-### Secure Git Hooks
-at pre-commit and pre-push stages (can be ignored with `--no-verify` switch, but will threaten dozens of kittens...)
-
 # Install
 
 0. Make sure node v18.12.1 or newer is installed
-1. Clone repository into `/modules/` inside your MagicMirror folder, with proper module name as directory (git clone to directory MMM-YOUR-MODULE)
-2. Run `npm install` inside `/modules/MMM-YOUR-MODULE/` folder
-3. Run `npm run init:mmm MMM-YOUR-MODULE`, it will automatically set up package.json for you
-4. Update `MODULE_NAME` value in `src/client/module.js` file to use MMM-YOUR-MODULE
-5. Run `npm run build`
-6. Check that `MMM-YOUR-MODULE.js`, `styles.css` and `node_helper.js` files have been created into current folder
-7. Add the module to the MagicMirror config.
+1. Clone repository into location of your choice BUT NOT under MagicMirror install!
+2. If not done at clone step, rename directory `MMM-REACT-CANVAS-TS` to match module name
+3. Run `npm install` inside `MMM-YOUR-MODULE/` folder
+4. Run `npm run init:mmm MMM-YOUR-MODULE`, it will automatically set up package.json for you
+5. Update `MODULE_NAME` value in `src/client/module.js` file to use MMM-YOUR-MODULE
+6. Run `npm run build` (development) or `npm run build-prod` (optimized)
+7. Check that `MMM-YOUR-MODULE.js`, `styles.css` and `node_helper.js` files have been created into current folder
+8. Create symbolic link from `/modules/` inside your MagicMirror folder, to module repository directory: e.g `ln -s ~/dev/MMM-YOUR-MODULE/`
+9. Add the module to the MagicMirror config.
