@@ -5,9 +5,13 @@ import '../../styles/reset.scss';
 import '../../styles/module.scss';
 import './MainSample.scss';
 
-interface Props {}
+interface Props {
+  oneProp?: string;
+}
 
-interface State {}
+interface State {
+  oneStateProperty?: number;
+}
 
 /**
  * MagicMirror
@@ -26,8 +30,8 @@ class MainSample extends PureComponent<Props, State> {
    */
   render() {
     return (
-      <div className={classnames('MainSample', 'dimmed', 'light', 'small')}>
-        <p className="MainSample__description">
+      <div className={classnames('main-sample', 'dimmed', 'light', 'small')}>
+        <p className="main-sample__description">
           Main component sample for MM2's React-Typescript template
         </p>
       </div>

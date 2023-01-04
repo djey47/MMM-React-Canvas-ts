@@ -2,7 +2,7 @@ import {
   NOTIF_INIT,
   NOTIF_SET_CONFIG,
 } from '../support/notifications';
-import { MM2Helper } from '../support/types';
+import { MM2Helper } from './types/mm2';
 
 /**
  * Magic Mirror

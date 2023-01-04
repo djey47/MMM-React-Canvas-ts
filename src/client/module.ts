@@ -22,6 +22,9 @@ const getWrapperId = (): string => {
   return `${MODULE_NAME}Wrapper`.replace(/-/g,'');
 };
 
+/**
+ * Register specified module to MagicMirror
+ */
 Module.register(MODULE_NAME, {
   // Define module defaults
   defaults: {},
@@ -29,9 +32,9 @@ Module.register(MODULE_NAME, {
   /**
    * Defines required scripts.
    */
-  getStyles: function(): Array<string> {
+  getStyles: function(): string[] {
     return [
-      this.file('styles.css'),      // Webpack bundle
+      this.file ? this.file('styles.css') : '',      // Webpack bundle
       'font-awesome.css',
     ];
   },
@@ -70,7 +73,7 @@ Module.register(MODULE_NAME, {
    * Intercepts local events
    */
   notificationReceived: function(notification: string) {
-    if (this.config.debug) Log.info(`**${this.name} notificationReceived: ${notification}`);
+    if (this.config?.debug) Log.info(`**${this.name} notificationReceived: ${notification}`);
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
       renderMainComponent(getWrapperId());
@@ -82,7 +85,7 @@ Module.register(MODULE_NAME, {
    * Intercepts server side events
    */
   socketNotificationReceived: function(notification: string, payload: object): void {
-    if (this.config.debug) {
+    if (this.config?.debug) {
       Log.info(`**${this.name} socketNotificationReceived: ${notification}`);
       Log.info(`**${this.name} socketNotificationReceived: ${JSON.stringify(payload, null, 2)}`);
     }

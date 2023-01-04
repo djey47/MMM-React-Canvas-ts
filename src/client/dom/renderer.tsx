@@ -23,14 +23,14 @@ export const renderWrapper = (wrapperId: string): HTMLDivElement => {
  * REACT gateway helper
  * @return Mounted component
  */
-export const renderMainComponent = (wrapperId: string): any => {
+export const renderMainComponent = (wrapperId: string): void => {
   const rootId = document.getElementById(wrapperId);
   if (!rootId) {
     Log.error(`** Could not find root div with id: ${wrapperId}! Aborting.`);
     return;
   }
 
-  return ReactDOM.render(
+  ReactDOM.render(
     <MainSample />,
     rootId
   );
