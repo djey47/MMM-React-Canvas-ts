@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
+import Subscribed from '../Subscribed/Subscribed';
 
 import '../../styles/reset.scss';
 import '../../styles/module.scss';
@@ -34,6 +35,7 @@ class MainSample extends PureComponent<Props, State> {
         <p className="main-sample__description">
           Main component sample for MM2's React-Typescript template
         </p>
+        <Subscribed prop1="text" />
       </div>
     );
   }

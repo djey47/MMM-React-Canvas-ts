@@ -8,6 +8,7 @@ import {
   renderWrapper,
   renderMainComponent,
 } from './dom/renderer';
+import { NotificationCatcher } from './hoc/with-notifications';
 
 /**
  * Custom MM2 module name
@@ -48,6 +49,9 @@ Module.register(MODULE_NAME, {
     // Global state
     this.loaded = false;
     this.viewEngineStarted = false;
+
+    Log.info('**Starting up notification catcher...');
+    NotificationCatcher.getInstance();
   },
 
   /**
@@ -73,12 +77,16 @@ Module.register(MODULE_NAME, {
    * Intercepts local events
    */
   notificationReceived: function(notification: string) {
-    if (this.config?.debug) Log.info(`**${this.name} notificationReceived: ${notification}`);
+    if (this.config?.debug) {
+      Log.info(`**${this.name} notificationReceived: ${notification}`);
+    }
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
       renderMainComponent(getWrapperId());
       this.viewEngineStarted = true;
     }
+
+    NotificationCatcher.getInstance().catchNotification(notification);
   },
 
   /**
@@ -94,6 +102,9 @@ Module.register(MODULE_NAME, {
       case Notifications.NOTIF_INIT:
         this.loaded = true;
         break;
+      /* Handle other notification types here ... */
     }
+
+    NotificationCatcher.getInstance().catchNotification(notification, payload);
   },
 });
