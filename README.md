@@ -39,7 +39,7 @@ provides ESLint, Stylelint checks: `npm run lint`
 3. Run `npm install` inside `MMM-YOUR-MODULE/` folder
 4. Run `npm run init:mmm MMM-YOUR-MODULE`, it will automatically set up package.json for you
 5. Update `MODULE_NAME` value in `src/client/module.js` file to use MMM-YOUR-MODULE
-6. Run `npm run build` (development) or `npm run build-prod` (optimized)
+6. Run `npm run build:module` (development) or `npm run build:module-prod` (optimized)
 7. Check that `MMM-YOUR-MODULE.js`, `styles.css` and `node_helper.js` files have been created into current folder
 8. Create symbolic link from `/modules/` inside your MagicMirror folder, to module repository directory: e.g `ln -s ~/dev/MMM-YOUR-MODULE/`
-9. Add the module to the MagicMirror config.
+9. Add the module to MagicMirror config.
