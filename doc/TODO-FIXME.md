@@ -10,6 +10,7 @@ TODO-FIXME
   - Debug logs
   - Support for different handlers per subscription?
 - Helper logging to electron debug tools via socket notification
+- Unit tests
 
 # FIXME
 - Fix systematic notif handler switch
