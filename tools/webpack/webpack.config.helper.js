@@ -10,8 +10,8 @@ module.exports = {
     path: outputPath,
     libraryTarget: 'umd',
   },
-  externals: [ 'node_helper' ], // MM2 provided
-  module: { 
+  externals: [ 'node_helper', 'logger' ], // MM2 provided
+  module: {
     rules: [...commonRules],
   },
   plugins: [...commonPlugins],
