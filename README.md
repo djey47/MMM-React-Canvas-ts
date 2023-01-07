@@ -10,7 +10,7 @@ MichMich's MagicMirror2 module template for convenient development with Typescri
 
 ## Highlights
 
-Requires node v18.12.1 or higher.
+Requires node v16 or higher.
 
 ### Typescript support
 for modern, safer language features wuth type checking (4.9.4)
