@@ -1,8 +1,10 @@
+import * as Log from 'logger';
 import {
   NOTIF_INIT,
   NOTIF_SET_CONFIG,
 } from '../support/notifications';
 import { MM2Helper } from './types/mm2';
+import { startProcessing } from './processing/custom-processor';
 
 /**
  * Magic Mirror
@@ -10,10 +12,12 @@ import { MM2Helper } from './types/mm2';
  */
 const mm2Helper: MM2Helper = {
   start: function() {
+    Log.log('**** mm2Helper:start');
     this.started = false;
   },
 
   socketNotificationReceived: function(notification: string, payload: object) {
+    Log.log('**** mm2Helper:socketNotificationReceived', { notification, payload });
     if (notification === NOTIF_SET_CONFIG && !this.started) {
       this.config = payload;
       this.started = true;
@@ -21,8 +25,10 @@ const mm2Helper: MM2Helper = {
       if (this.sendSocketNotification) {
         this.sendSocketNotification(NOTIF_INIT);
       }
+
+      startProcessing(this);
     }
   },
 };
 
-export default mm2Helper;
+module.exports = mm2Helper;

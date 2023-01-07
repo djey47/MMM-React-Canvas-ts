@@ -4,7 +4,6 @@
  */
 
 // provided dependency (MM2)
-// FIXME help TS recognize node_helper otherwise production build won't work
 import * as NodeHelper from 'node_helper';
 import * as NodeHelperImpl from './helper_impl';
 
