@@ -45,6 +45,7 @@ Module.register(MODULE_NAME, {
    */
   start: function(): void {
     Log.info(`**Starting module: ${this.name}`);
+    Log.info(`**Module configuration: ${JSON.stringify(this.config)}`);
 
     // Global state
     this.loaded = false;
@@ -52,6 +53,11 @@ Module.register(MODULE_NAME, {
 
     Log.info('**Starting up notification catcher...');
     NotificationCatcher.getInstance();
+
+    Log.info('**Sending configuration to helper...');
+    if (this.sendSocketNotification) {
+      this.sendSocketNotification(Notifications.NOTIF_SET_CONFIG, this.config);
+    }
   },
 
   /**

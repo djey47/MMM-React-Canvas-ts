@@ -29,6 +29,7 @@ interface MM2ModuleImpl {
   loaded?: boolean;
   name?: string;
   notificationReceived(notif: string);
+  sendSocketNotification?(notif: string, payload?: object);
   socketNotificationReceived(notif: string, payload: object);
   start(): void;
   viewEngineStarted?: boolean;
