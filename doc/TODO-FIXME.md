@@ -2,6 +2,7 @@ TODO-FIXME
 ==========
 
 # TODO
+- add prettier as formatter
 - Better MM2 interface doc
   => see https://docs.magicmirror.builders/development/core-module-file.html#module-instance-methods
 - React HOC for notifications
