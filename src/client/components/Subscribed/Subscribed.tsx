@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 import { withNotifications } from '../../hoc/with-notifications';
 
 interface OwnProps {

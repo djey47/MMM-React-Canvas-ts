@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subscribed component should render correctly with notif data 1`] = `
+<div
+  className="subscribed"
+>
+  <p
+    className="subscribed__text"
+  >
+    Subscribed component to 'NOTIF' event
+  </p>
+  <p
+    className="subscribed__value"
+  >
+    Last received value: 
+    {"key":"value"}
+  </p>
+</div>
+`;
+
+exports[`Subscribed component should render correctly without notif data 1`] = `
+<div
+  className="subscribed"
+>
+  <p
+    className="subscribed__text"
+  >
+    Subscribed component to 'NOTIF' event
+  </p>
+  <p
+    className="subscribed__value"
+  >
+    Last received value: 
+  </p>
+</div>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainSample component should render correctly with default props 1`] = `
+<div
+  className="main-sample dimmed light small"
+>
+  <p
+    className="main-sample__description"
+  >
+    Main component sample for MM2's React-Typescript template
+  </p>
+  <div
+    prop1="text"
+  >
+    Subscribed component
+  </div>
+</div>
+`;
