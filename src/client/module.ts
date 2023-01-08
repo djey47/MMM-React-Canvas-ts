@@ -76,7 +76,8 @@ Module.register(MODULE_NAME, {
     if (this.viewEngineStarted) {
       return undefined;
     }
-    return renderWrapper(getWrapperId());
+    const wrapperId = getWrapperId();
+    return renderWrapper(wrapperId);
   },
 
   /**
