@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
- */
+*/
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 const mockReactDOMRender = jest.fn();
 jest.mock('react-dom', () => ({
@@ -11,7 +12,6 @@ import { renderMainComponent, renderWrapper } from "./renderer";
 
 describe('MM2 module React renderer', () => {
   beforeAll(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     global.Log = {
       error: jest.fn(),
@@ -34,7 +34,6 @@ describe('MM2 module React renderer', () => {
     // TODO add nominal render case when migrating to React18 syntax
     beforeEach(() => {
       mockReactDOMRender.mockReset();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       global.Log.error.mockReset();
 
@@ -49,7 +48,6 @@ describe('MM2 module React renderer', () => {
       renderMainComponent('wrapper-id');
 
       // then
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       expect(global.Log.error).toHaveBeenCalled();
       expect(mockReactDOMRender).not.toHaveBeenCalled();
