@@ -178,7 +178,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', { tsConfig: './src/client/tsconfig.json' }],
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: './src/client/tsconfig.json' }],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
