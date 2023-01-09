@@ -40,7 +40,7 @@ export function withNotifications<P>(WrappedComponent: ComponentType<P>, subscri
  * This will provide a way to plug React components (via HOC) to (socket/non socket) notifications.
  */
 export class NotificationCatcher {
-  static instance: NotificationCatcher;
+  static instance?: NotificationCatcher = undefined;
   notificationHandler: (n:  string, p?: object) => void;
   subscribedNotifications: string[];
   isInitialized: boolean;
@@ -69,7 +69,7 @@ export class NotificationCatcher {
    * @param subscribed list of notification codes to store and relay payload data from ('*' will relay everything)
    */
   public switchHandler(handler: (n:  string, p?: object) => void, subscribed: string[]) {
-    if (handler === this.notificationHandler) {
+    if (handler == this.notificationHandler) {
       return;
     }
 
@@ -88,10 +88,6 @@ export class NotificationCatcher {
    * @param payload notification contents, eventually
    */
   public catchNotification(notif: string, payload?: object) {
-    if (!this.notificationHandler) {
-      console.log(`**** Notification catcher rejecting notification without handler {${notif}:${payload}}`);
-    }
-
     if (this.subscribedNotifications.includes('*') || this.subscribedNotifications.includes(notif)) {
       console.log(`**** Notification catcher relaying notification {${notif}:${payload}}`);
       this.notificationHandler(notif, payload);
