@@ -14,7 +14,7 @@ export function withNotifications<P>(WrappedComponent: ComponentType<P>, subscri
 
     NotificationCatcher.getInstance().switchHandler(handleNotificationReceived, subscribed);
 
-    function handleNotificationReceived(notif: string, payload?: object) {
+    function handleNotificationReceived(notif: string, payload?: unknown) {
       const dataKey = `data_${notif}`;
       setData({
         ...data,
@@ -41,7 +41,7 @@ export function withNotifications<P>(WrappedComponent: ComponentType<P>, subscri
  */
 export class NotificationCatcher {
   static instance?: NotificationCatcher = undefined;
-  notificationHandler: (n:  string, p?: object) => void;
+  notificationHandler: (n:  string, p?: unknown) => void;
   subscribedNotifications: string[];
   isInitialized: boolean;
 
@@ -68,7 +68,7 @@ export class NotificationCatcher {
    * @param handler relay function to be invoked on subscribed notification received
    * @param subscribed list of notification codes to store and relay payload data from ('*' will relay everything)
    */
-  public switchHandler(handler: (n:  string, p?: object) => void, subscribed: string[]) {
+  public switchHandler(handler: (n:  string, p?: unknown) => void, subscribed: string[]) {
     if (handler == this.notificationHandler) {
       return;
     }
@@ -87,7 +87,7 @@ export class NotificationCatcher {
    * @param notif notification code
    * @param payload notification contents, eventually
    */
-  public catchNotification(notif: string, payload?: object) {
+  public catchNotification(notif: string, payload?: unknown) {
     if (this.subscribedNotifications.includes('*') || this.subscribedNotifications.includes(notif)) {
       console.log(`**** Notification catcher relaying notification {${notif}:${payload}}`);
       this.notificationHandler(notif, payload);
@@ -96,7 +96,7 @@ export class NotificationCatcher {
     }
   }
 
-  private defaultHandler(n: string, p?: object) {
+  private defaultHandler(n: string, p?: unknown) {
     console.log(`**** Notification catcher processing notification with default handler {${n}:${p}}`);
   }
 }

@@ -1,8 +1,22 @@
+/**
+ * The MagicMirror contains a convenience wrapper for logging. Currently, this logger is a simple proxy to the original console.log methods.
+ * But it might get additional features in the future.
+ * @see https://docs.magicmirror.builders/development/logger.html
+ */
 export interface MM2Logger {
-  info(message: string): void;
-  error(message: string): void;
+  error(...data: unknown[]): void;
+  info(...data: unknown[]): void;
+  log(...data: unknown[]): void;
 }
 
+/**
+ * @see https://docs.magicmirror.builders/development/core-module-file.html
+ */
 export interface MM2ModuleHelper {
-  register(moduleName: string, moduleImplementation: MM2ModuleImpl): void;
+  /**
+   * This function has to be called for the module to be used
+   * @param moduleName the name of the module
+   * @param moduleProperties an object with the module properties 
+   */
+  register(moduleName: string, moduleProperties: MM2ModuleProperties): void;
 }

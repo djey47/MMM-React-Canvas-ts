@@ -1,21 +1,21 @@
 /** MM2 provided libraries */
 
 /**
- * Core helper
+ * That is the core helper allowing your own helper instantiation.
  */
 declare module 'node_helper' {
   /**
-   * @param helper Check interface in mm2.ts
+   * @param helper Check MM2Helper interface in mm2.ts
    */
   declare function create(helper: MM2Helper);
 }
 
 /**
- * Simple console logger
+ * The MagicMirror contains a convenience wrapper for logging. Currently, this logger is a simple proxy to the original console.log methods.
+ * But it might get additional features in the future.
  */
 declare module 'logger' {
-  /**
-   * @param data item to be displayed
-   */
+  declare function error(...data: unknown[]);
+  declare function info(...data: unknown[]);
   declare function log(...data: unknown[]);
 }

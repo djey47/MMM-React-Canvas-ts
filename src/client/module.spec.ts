@@ -9,8 +9,9 @@ const moduleMock: MM2ModuleHelper = {
 global.Module = moduleMock;
 
 const logMock: MM2Logger = {
-  info: jest.fn(),
   error: jest.fn(),
+  info: jest.fn(),
+  log: jest.fn(),
 }
 // @ts-ignore
 global.Log = logMock;
@@ -41,7 +42,7 @@ describe('MM2 Module client', () => {
 
     const {name, implementation} = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
     expect(name).toBe('MMM-React-Canvas-ts');
-    expect(implementation.defaults).toEqual({});
+    expect(implementation.defaults).toEqual({ debug: false });
     expect(typeof implementation.getDom).toBe('function');
     expect(typeof implementation.getHeader).toBe('function');
     expect(typeof implementation.getStyles).toBe('function');
@@ -82,7 +83,7 @@ describe('MM2 Module client', () => {
       implementation.start();
 
       // then
-      expect(implementation.loaded).toBe(false);
+      expect(implementation.helperLoaded).toBe(false);
       expect(implementation.viewEngineStarted).toBe(false);
       expect(sendSocketNotificationMock).toHaveBeenCalledWith('SET_CONFIG', { debug: false });
     });
@@ -216,7 +217,7 @@ describe('MM2 Module client', () => {
       expect(mockCatchNotification).toHaveBeenCalledWith('NOTIF', {});
     });    
     
-    it('should switch loaded flag to true when INIT socket notification received', () => {
+    it('should switch helperLoaded flag to true when INIT socket notification received', () => {
       // given
       const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
 
@@ -224,7 +225,7 @@ describe('MM2 Module client', () => {
       implementation.socketNotificationReceived('INIT', {});
 
       // then
-      expect(implementation.loaded).toBe(true);
+      expect(implementation.helperLoaded).toBe(true);
       expect(mockCatchNotification).toHaveBeenCalledWith('INIT', {});
     });
 
@@ -236,10 +237,10 @@ function checkAndExtractRegistration(call?: unknown) {
     fail('Module registration call did not happen!');
   }
   const name = mockModuleRegister.mock.lastCall[0] as string;
-  const implementation = mockModuleRegister.mock.lastCall[1] as MM2ModuleImpl;
+  const implementation = mockModuleRegister.mock.lastCall[1] as MM2ModuleProperties;
 
   // Add MM2 inherited bits into implementation
-  const enhancedImplementation: MM2ModuleImpl = {
+  const enhancedImplementation: MM2ModuleProperties = {
     ...implementation,
     config: {
       debug: false,

@@ -81,7 +81,7 @@ describe('with-notifications HOC', () => {
       it('should change subscription and handler', () => {
         // given
         const catcher = new NotificationCatcher();
-        const handler = (n: string, p?: object) => {
+        const handler = (n: string, p?: unknown) => {
           console.log({ n, p });
         };
 

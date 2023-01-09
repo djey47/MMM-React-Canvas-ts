@@ -27,12 +27,10 @@ const getWrapperId = (): string => {
  * Register specified module to MagicMirror
  */
 Module.register(MODULE_NAME, {
-  // Define module defaults
-  defaults: {},
+  defaults: {
+    debug: false,
+  },
 
-  /**
-   * Defines required scripts.
-   */
   getStyles: function(): string[] {
     return [
       this.file ? this.file('styles.css') : '',      // Webpack bundle
@@ -40,15 +38,12 @@ Module.register(MODULE_NAME, {
     ];
   },
 
-  /**
-   * Defines start sequence.
-   */
   start: function(): void {
     Log.info(`**Starting module: ${this.name}`);
     Log.info(`**Module configuration: ${JSON.stringify(this.config)}`);
 
     // Global state
-    this.loaded = false;
+    this.helperLoaded = false;
     this.viewEngineStarted = false;
 
     Log.info('**Starting up notification catcher...');
@@ -60,9 +55,6 @@ Module.register(MODULE_NAME, {
     }
   },
 
-  /**
-   * What's being written on top
-   */
   getHeader: function(): string {
     return 'MM2 Module Header';
   },
@@ -70,7 +62,7 @@ Module.register(MODULE_NAME, {
   /**
    * Overrides DOM generator.
    * At first, it will create module wrapper and return it to be correctly attached to MM2 app.
-   * When module is loaded (configuration updated server-side), will start REACT engine.
+   * When helper is loaded (configuration updated server-side), will start REACT engine.
    */
   getDom: function(): HTMLDivElement | undefined {
     if (this.viewEngineStarted) {
@@ -80,9 +72,6 @@ Module.register(MODULE_NAME, {
     return renderWrapper(wrapperId);
   },
 
-  /**
-   * Intercepts local events
-   */
   notificationReceived: function(notification: string) {
     if (this.config?.debug) {
       Log.info(`**${this.name} notificationReceived: ${notification}`);
@@ -96,10 +85,7 @@ Module.register(MODULE_NAME, {
     NotificationCatcher.getInstance().catchNotification(notification);
   },
 
-  /**
-   * Intercepts server side events
-   */
-  socketNotificationReceived: function(notification: string, payload: object): void {
+  socketNotificationReceived: function(notification: string, payload: unknown): void {
     if (this.config?.debug) {
       Log.info(`**${this.name} socketNotificationReceived: ${notification}`);
       Log.info(`**${this.name} socketNotificationReceived: ${JSON.stringify(payload, null, 2)}`);
@@ -107,7 +93,7 @@ Module.register(MODULE_NAME, {
 
     switch(notification) {
       case Notifications.NOTIF_INIT:
-        this.loaded = true;
+        this.helperLoaded = true;
         break;
       /* Handle other notification types here ... */
     }
