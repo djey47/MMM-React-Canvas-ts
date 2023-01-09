@@ -32,6 +32,10 @@ export function withNotifications<P>(WrappedComponent: ComponentType<P>, subscri
   return EnhancedComponent;
 }
 
+export interface NotificationCatcherOptions {
+  isDebugMode?: boolean,
+}
+
 /**
  * Catcher singleton to be module-wide used
  *
@@ -44,27 +48,39 @@ export class NotificationCatcher {
   notificationHandler: (n:  string, p?: unknown) => void;
   subscribedNotifications: string[];
   isInitialized: boolean;
+  options: NotificationCatcherOptions;
 
-  constructor() {
+  constructor(options?: NotificationCatcherOptions) {
     this.notificationHandler = this.defaultHandler;
     this.subscribedNotifications = ['*'];
     this.isInitialized = false;
+    this.options = {
+      isDebugMode: false,
+      ...options,
+    };
 
-    console.log('**** Notification catcher ready for initialization');
+    Log.log('**** with-notifications: Notification catcher ready for initialization');
   }
 
   /**
    * @returns the one and only notification catcher instance
    */
-  public static getInstance() {
+  public static getInstance(options?: NotificationCatcherOptions) {
     if (!NotificationCatcher.instance) {
       NotificationCatcher.instance = new NotificationCatcher();
     }
+
+    // Update options if necessary
+    NotificationCatcher.instance.options = {
+      ...NotificationCatcher.instance.options,
+      ...options,
+    };
+
     return NotificationCatcher.instance;
   }
 
   /**
-   * Makes catcher instance process notifications them with a custom handler
+   * Makes catcher instance process notifications with a custom handler
    * @param handler relay function to be invoked on subscribed notification received
    * @param subscribed list of notification codes to store and relay payload data from ('*' will relay everything)
    */
@@ -76,7 +92,7 @@ export class NotificationCatcher {
     this.notificationHandler = handler;
     this.subscribedNotifications = subscribed;
 
-    console.log(`**** Notification catcher switched to handler ${handler} for ${subscribed} `);
+    this.debugLog(`Notification catcher switched to handler ${handler} for ${subscribed}`);
   }
 
   /**
@@ -89,14 +105,21 @@ export class NotificationCatcher {
    */
   public catchNotification(notif: string, payload?: unknown) {
     if (this.subscribedNotifications.includes('*') || this.subscribedNotifications.includes(notif)) {
-      console.log(`**** Notification catcher relaying notification {${notif}:${payload}}`);
+      this.debugLog(`Notification catcher relaying notification {${notif}:${payload}}`);
+
       this.notificationHandler(notif, payload);
     } else {
-      console.log(`**** Notification catcher rejecting notification without subscription {${notif}:${payload}}`);
+      this.debugLog(`Notification catcher rejecting notification without subscription {${notif}:${payload}}`);
     }
   }
 
   private defaultHandler(n: string, p?: unknown) {
-    console.log(`**** Notification catcher processing notification with default handler {${n}:${p}}`);
+    this.debugLog(`Notification catcher processing notification with default handler {${n}:${p}}`);
+  }
+
+  private debugLog(message: string) {
+    if(this.options.isDebugMode) {
+      Log.log(`**** with-notifications: ${message}`);
+    }
   }
 }
