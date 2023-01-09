@@ -1,4 +1,5 @@
 // Must be located BEFORE the imports
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockWithNotifications = jest.fn((c, s) => c);
 
 import renderer from 'react-test-renderer';

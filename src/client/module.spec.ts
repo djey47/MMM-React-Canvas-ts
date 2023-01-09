@@ -18,21 +18,25 @@ const logMock: MM2Logger = {
 // @ts-ignore
 global.Log = logMock;
 
-// import {
-//   renderWrapper,
-//   renderMainComponent,
-// } from './dom/renderer';
-import './module';
-
-jest.mock('./dom/renderer');
-// jest.mock('./hoc/with-notifications', () => ({
-//   getInstance: mockCatcherGetInstance,
-// }))
-
-// const renderWrapperMock = renderWrapper as jest.Mock;
-// const renderMainComponentMock = renderMainComponent as jest.Mock;
 const sendSocketNotificationMock = jest.fn();
 
+const mockRenderMainComponent = jest.fn();
+const mockRenderWrapper = jest.fn();
+jest.mock('./dom/renderer', () => ({
+  renderMainComponent: mockRenderMainComponent,
+  renderWrapper: mockRenderWrapper,
+}));
+
+const mockCatchNotification = jest.fn();
+jest.mock('./hoc/with-notifications', () => ({
+  NotificationCatcher: {
+    getInstance: () => ({
+      catchNotification: mockCatchNotification,
+    }),
+  },
+}));
+
+import './module';
 
 describe('MM2 Module client', () => {
   it('should register client implementation', () => {
@@ -56,6 +60,15 @@ describe('MM2 Module client', () => {
 
       // when-then
       expect(getStyles()).toEqual(['/file/styles.css', 'font-awesome.css']);
+    });    
+    
+    it('should return correct styles when file utility not available', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      implementation.file = undefined;
+
+      // when-then
+      expect(implementation.getStyles()).toEqual(['', 'font-awesome.css']);
     });
   });
 
@@ -74,8 +87,150 @@ describe('MM2 Module client', () => {
       // then
       expect(implementation.loaded).toBe(false);
       expect(implementation.viewEngineStarted).toBe(false);
-      expect(sendSocketNotificationMock).toHaveBeenCalledWith('SET_CONFIG', {});
+      expect(sendSocketNotificationMock).toHaveBeenCalledWith('SET_CONFIG', { debug: false });
     });
+  });
+
+  describe('getHeader overriden function', () => {
+    it('should return header string', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      
+      // when-then
+      expect(implementation.getHeader()).toBe('MM2 Module Header');
+    });
+
+  });  
+  
+  describe('getDom overriden function', () => {
+    beforeEach(() => {
+      mockRenderWrapper.mockReset();
+    });
+
+    it('should return undefined when react render engine is started', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      implementation.viewEngineStarted = true;
+
+      // when-then
+      expect(implementation.getDom()).toBeUndefined();
+    });    
+    
+    it('should return wrapper div when react render engine is not started', () => {
+      // given
+      mockRenderWrapper.mockImplementation(() => ({}));
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      implementation.viewEngineStarted = false;
+      
+      // when
+      const actual = implementation.getDom();
+
+      // then
+      expect(actual).toEqual({});
+      expect(mockRenderWrapper).toHaveBeenCalledWith('MMMReactCanvastsWrapper')
+    });
+  });
+
+  describe('notificationReceived overriden function', () => {
+    beforeEach(() => {
+      mockRenderMainComponent.mockReset();
+      mockCatchNotification.mockReset();
+    });
+
+    it('should handle notification without configuration', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      implementation.config = undefined;
+
+      // when-then
+      implementation.notificationReceived('NOTIF');
+    });       
+    
+    it('should handle notification in debug mode', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      if (implementation.config) {
+        implementation.config.debug = true;
+      }
+
+      // when-then
+      implementation.notificationReceived('NOTIF');
+    });     
+    
+    it('should invoke renderMainComponent function when DOM_OBJECTS_CREATED notification received', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+
+      // when
+      implementation.notificationReceived('DOM_OBJECTS_CREATED');
+
+      // then
+      expect(implementation.viewEngineStarted).toBe(true);
+      expect(mockRenderMainComponent).toHaveBeenCalledWith('MMMReactCanvastsWrapper');
+      expect(mockCatchNotification).toHaveBeenCalledWith('DOM_OBJECTS_CREATED');
+    });    
+    
+    it('should invoke NotificationCatcher when notification received', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+
+      // when
+      implementation.notificationReceived('NOTIF');
+
+      // then
+      expect(mockRenderMainComponent).not.toHaveBeenCalled();
+      expect(mockCatchNotification).toHaveBeenCalledWith('NOTIF');
+    });
+  });
+
+  describe('socketNotificationReceived overriden function', () => {
+    beforeEach(() => {
+      mockCatchNotification.mockReset();
+    });
+
+    it('should handle socket notification without configuration', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      implementation.config = undefined;
+
+      // when-then
+      implementation.socketNotificationReceived('NOTIF', {});
+    });       
+
+    it('should handle socket notification in debug mode', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      if (implementation.config) {
+        implementation.config.debug = true;
+      }
+
+      // when-then
+      implementation.socketNotificationReceived('NOTIF', {});
+    });  
+
+    it('should invoke NotificationCatcher when socket notification received', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+
+      // when
+      implementation.socketNotificationReceived('NOTIF', {});
+
+      // then
+      expect(mockCatchNotification).toHaveBeenCalledWith('NOTIF', {});
+    });    
+    
+    it('should switch loaded flag to true when INIT socket notification received', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+
+      // when
+      implementation.socketNotificationReceived('INIT', {});
+
+      // then
+      expect(implementation.loaded).toBe(true);
+      expect(mockCatchNotification).toHaveBeenCalledWith('INIT', {});
+    });
+
   });
 });
 
@@ -87,9 +242,11 @@ function checkAndExtractRegistration(call?: unknown) {
   const implementation = mockModuleRegister.mock.lastCall[1] as MM2ModuleImpl;
 
   // Add MM2 inherited bits into implementation
-  const enhancedImplementation = {
+  const enhancedImplementation: MM2ModuleImpl = {
     ...implementation,
-    config: {},
+    config: {
+      debug: false,
+    },
     file: (fileName: string) => `/file/${fileName}`,
     sendSocketNotification: sendSocketNotificationMock,
   }
