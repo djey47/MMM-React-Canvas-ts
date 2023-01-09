@@ -1,4 +1,4 @@
-import * as Log from 'logger';
+import { Log } from './utils/mm2_facades';
 import {
   NOTIF_INIT,
   NOTIF_SET_CONFIG,

@@ -1,4 +1,4 @@
-import * as Log from 'logger';
+import { Log } from '../utils/mm2_facades';
 import { MM2Helper } from '../types/mm2';
 
 export function startProcessing(moduleContext: MM2Helper) {

@@ -4,7 +4,7 @@
  */
 
 // provided dependency (MM2)
-import * as NodeHelper from 'node_helper';
 import * as NodeHelperImpl from './helper_impl';
+import { NodeHelper } from './utils/mm2_facades';
 
 module.exports = NodeHelper.create(NodeHelperImpl);
