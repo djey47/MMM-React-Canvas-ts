@@ -1,12 +1,10 @@
-// TODO See to mock NotificationCatcher properly
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import { MM2ModuleHelper } from './types/mm2';
-// const mockCatcherGetInstance = jest.fn();
 const mockModuleRegister = jest.fn();
 const moduleMock: MM2ModuleHelper = {
   register: mockModuleRegister,
 }
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 global.Module = moduleMock;
 
@@ -14,11 +12,8 @@ const logMock: MM2Logger = {
   info: jest.fn(),
   error: jest.fn(),
 }
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 global.Log = logMock;
-
-const sendSocketNotificationMock = jest.fn();
 
 const mockRenderMainComponent = jest.fn();
 const mockRenderWrapper = jest.fn();
@@ -37,6 +32,8 @@ jest.mock('./hoc/with-notifications', () => ({
 }));
 
 import './module';
+
+const sendSocketNotificationMock = jest.fn();
 
 describe('MM2 Module client', () => {
   it('should register client implementation', () => {
