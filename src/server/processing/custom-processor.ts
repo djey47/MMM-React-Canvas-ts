@@ -3,7 +3,7 @@ import { MM2Helper } from '../types/mm2';
 
 export function startProcessing(helperContext: MM2Helper) {
   if (helperContext.config?.debug) {
-    Log.log('**** custom-processor:startProcessing', helperContext);
+    Log.log(`**** custom-processor::startProcessing with config: ${JSON.stringify(helperContext.config)}`);
   }
 
   let iterationIndex = 0;
