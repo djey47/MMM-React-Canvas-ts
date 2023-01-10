@@ -100,7 +100,7 @@ describe('with-notifications HOC', () => {
         // given
         const catcher = new NotificationCatcher();
         const handler = (n: string, p?: unknown) => {
-          console.log({ n, p });
+          console.info('Test notification handler:', { n, p });
         };
 
         // when
