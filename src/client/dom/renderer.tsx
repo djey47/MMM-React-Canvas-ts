@@ -1,5 +1,4 @@
-import ReactDOM from 'react-dom';
-
+import { createRoot } from 'react-dom/client';
 import MainSample from '../components/Main/MainSample';
 
 /**
@@ -23,11 +22,12 @@ export const renderWrapper = (wrapperId: string): HTMLDivElement => {
  * @return Mounted component
  */
 export const renderMainComponent = (wrapperId: string): void => {
-  const rootId = document.getElementById(wrapperId);
-  if (!rootId) {
+  const wrapperElement = document.getElementById(wrapperId);
+  if (!wrapperElement) {
     Log.error(`** Could not find root div with id: ${wrapperId}! Aborting.`);
     return;
   }
 
-  ReactDOM.render(<MainSample />, rootId);
+  const root = createRoot(wrapperElement);
+  root.render(<MainSample />);
 };

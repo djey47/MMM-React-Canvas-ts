@@ -3,11 +3,18 @@
  */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-const mockReactDOMRender = jest.fn();
-jest.mock('react-dom', () => ({
-  render: mockReactDOMRender,
+const mockRender = jest.fn();
+jest.mock('react-dom/client', () => ({
+  createRoot: () => ({
+    render: mockRender,
+  }),
 }));
 
+jest.mock('../components/Main/MainSample', () => () => (
+  <div>MainSample component</div>
+));
+
+import MainSample from '../components/Main/MainSample';
 import { renderMainComponent, renderWrapper } from './renderer';
 
 describe('MM2 module React renderer', () => {
@@ -33,7 +40,7 @@ describe('MM2 module React renderer', () => {
   describe('renderMainComponent function', () => {
     // TODO add nominal render case when migrating to React18 syntax
     beforeEach(() => {
-      mockReactDOMRender.mockReset();
+      mockRender.mockReset();
       // @ts-ignore
       global.Log.error.mockReset();
 
@@ -50,7 +57,21 @@ describe('MM2 module React renderer', () => {
       // then
       // @ts-ignore
       expect(global.Log.error).toHaveBeenCalled();
-      expect(mockReactDOMRender).not.toHaveBeenCalled();
+      expect(mockRender).not.toHaveBeenCalled();
+    });
+
+    it('should render with wrapper DOM element', () => {
+      // given
+      const wrapper = renderWrapper('wrapper-id');
+      document.body.appendChild(wrapper);
+
+      // when
+      renderMainComponent('wrapper-id');
+
+      // then
+      // @ts-ignore
+      expect(global.Log.error).not.toHaveBeenCalled();
+      expect(mockRender).toHaveBeenCalledWith(<MainSample />);
     });
   });
 });
