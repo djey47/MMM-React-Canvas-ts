@@ -19,8 +19,8 @@
     "build:client-prod": "webpack --mode=production --config tools/webpack/webpack.config.module.js",
     "build:helper": "webpack --mode=development --config tools/webpack/webpack.config.helper.js",
     "build:helper-prod": "webpack --mode=production --config tools/webpack/webpack.config.helper.js",
-    "analyze:module": "npm run build:module && npx webpack-bundle-analyzer stats.json .",
-    "analyze:helper": "npm run build:helper && npx webpack-bundle-analyzer stats.json ."
+    "prettier:write": "prettier --write .",
+    "prettier:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,7 @@
     "css-loader": "6.7.3",
     "edit-json-file": "1.7.0",
     "eslint": "8.30.0",
+    "eslint-config-prettier": "8.6.0",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
     "identity-obj-proxy": "3.0.0",
@@ -57,6 +58,7 @@
     "jest-environment-jsdom": "29.3.1",
     "mini-css-extract-plugin": "2.7.2",
     "node-sass": "8.0.0",
+    "prettier": "2.8.2",
     "react-test-renderer": "18.2.0",
     "sass-loader": "13.2.0",
     "stylelint": "14.16.1",

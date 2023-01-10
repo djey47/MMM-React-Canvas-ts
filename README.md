@@ -29,6 +29,14 @@ handled by Webpack: `npm run build` or `npm run build-prod`
 ### Code linting
 provides ESLint, Stylelint checks: `npm run lint`
 
+### Code formatter
+*for ts/tsx files only*
+
+`npm run prettier:check` (preview) and `npm run prettier:write` (to process reformatting)
+
+### Unit tests
+`npm test` or `npm run test:watch` (for interactive mode)
+
 #### Stylelint checks for BEM syntax
 
 # Install

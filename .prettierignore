@@ -1,0 +1,13 @@
+.vscode/
+coverage/
+doc/
+node_modules/
+.eslintrc.cjs
+.stylelintrc
+jest.config.ts
+MMM-*.js
+node_helper.js
+*.css
+*.md
+tsconfig.json
+webpack.*
