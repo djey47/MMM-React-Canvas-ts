@@ -36,8 +36,8 @@ Module.register(MODULE_NAME, {
   },
 
   start: function (): void {
-    this.debugLog('**** Starting module:', this.name);
-    this.debugLog('**** Module configuration:', JSON.stringify(this.config));
+    this.debugLog(`**** Starting module: ${this.name}`);
+    this.debugLog(`**** Module configuration: ${JSON.stringify(this.config)}`);
 
     // Global state
     this.helperLoaded = false;
@@ -71,7 +71,7 @@ Module.register(MODULE_NAME, {
   },
 
   notificationReceived: function (notification: string) {
-    this.debugLog(`**** ${this.name}::notificationReceived:`, notification);
+    this.debugLog(`**** ${this.name}::notificationReceived: ${notification}`);
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
       renderMainComponent(getWrapperId());
@@ -86,9 +86,7 @@ Module.register(MODULE_NAME, {
     payload: unknown
   ): void {
     this.debugLog(
-      `**** ${this.name}::socketNotificationReceived:`,
-      notification,
-      JSON.stringify(payload, null, 2)
+      `**** ${this.name}::socketNotificationReceived: ${notification} ${JSON.stringify(payload, null, 2)}`
     );
 
     switch (notification) {
@@ -101,7 +99,7 @@ Module.register(MODULE_NAME, {
     NotificationCatcher.getInstance().catchNotification(notification, payload);
   },
 
-  debugLog: function (...data: unknown[]) {
+  debugLog: function (data: string) {
     if (this.config?.debug) {
       Log.log(data);
     }

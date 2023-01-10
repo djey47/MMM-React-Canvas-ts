@@ -4,9 +4,9 @@
  * @see https://docs.magicmirror.builders/development/logger.html
  */
 export interface MM2Logger {
-  error(...data: unknown[]): void;
-  info(...data: unknown[]): void;
-  log(...data: unknown[]): void;
+  error(data: string): void;
+  info(data: string): void;
+  log(data: string): void;
 }
 
 /**

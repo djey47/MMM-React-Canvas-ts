@@ -8,9 +8,9 @@ declare const Module: MM2ModuleHelper;
  * @see https://docs.magicmirror.builders/development/logger.html
  */
 interface MM2Logger {
-  error(...data: unknown[]): void;
-  info(...data: unknown[]): void;
-  log(...data: unknown[]): void;
+  error(data: string): void;
+  info(data: string): void;
+  log(data: string): void;
 }
 
 /**
@@ -116,5 +116,5 @@ interface MM2ModuleProperties {
    * React Canvas additional property for internal use.
    * Writes data via the embedded logger only if debug mode is enabled.
    */
-  debugLog(...data: unknown[]): void;
+  debugLog(data: string): void;
 }

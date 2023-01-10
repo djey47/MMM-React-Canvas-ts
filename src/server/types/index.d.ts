@@ -15,7 +15,7 @@ declare module 'node_helper' {
  * But it might get additional features in the future.
  */
 declare module 'logger' {
-  declare function error(...data: unknown[]);
-  declare function info(...data: unknown[]);
-  declare function log(...data: unknown[]);
+  declare function error(data: string);
+  declare function info(data: string);
+  declare function log(data: string);
 }
