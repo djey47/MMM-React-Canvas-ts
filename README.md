@@ -45,7 +45,7 @@ Provides ESLint, Stylelint checks: `npm run lint`
 3. If not done at previous step, rename `MMM-REACT-CANVAS-TS` parent directory to match module name e.g  `MMM-YOUR-MODULE`
 4. Run `npm install` inside `MMM-YOUR-MODULE` folder
 5. Run `npm run init:mmm MMM-YOUR-MODULE`, it will automatically set up package.json for you
-6. Update `MODULE_NAME` value in `src/client/module.js` file to use `MMM-YOUR-MODULE`
+6. Update `MODULE_NAME` value in `src/client/module.ts` file to use `MMM-YOUR-MODULE`
 7. Run `npm run build:module` (development) or `npm run build:module-prod` (optimized)
 8. Check that `MMM-YOUR-MODULE.js`, `styles.css` and `node_helper.js` files have been created into current folder
 9. Create symbolic link from `/modules/` inside your MagicMirror folder, to module repository directory: e.g `ln -s ~/dev/MMM-YOUR-MODULE/`
