@@ -10,11 +10,11 @@ TODO-FIXME
 - Helper logging to electron debug tools via socket notification
 
 # FIXME
-- MM2 integrated logger does not support varargs
-  => fix all signatures
-- Fix systematic notif handler switch
 
 # DONE
+- [x] Fix systematic notif handler switch
+- [x] MM2 integrated logger does not support varargs
+  => fix all signatures
 - [x] Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
   => migrate to create root in client part
   => update unit test in renderer
