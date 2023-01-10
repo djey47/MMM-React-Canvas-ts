@@ -86,7 +86,13 @@ Module.register(MODULE_NAME, {
     payload: unknown
   ): void {
     this.debugLog(
-      `**** ${this.name}::socketNotificationReceived: ${notification} ${JSON.stringify(payload, null, 2)}`
+      `**** ${
+        this.name
+      }::socketNotificationReceived: ${notification} ${JSON.stringify(
+        payload,
+        null,
+        2
+      )}`
     );
 
     switch (notification) {
