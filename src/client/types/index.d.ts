@@ -20,7 +20,7 @@ interface MM2ModuleHelper {
   /**
    * This function has to be called for the module to be used
    * @param moduleName the name of the module
-   * @param moduleProperties an object with the module properties 
+   * @param moduleProperties an object with the module properties
    */
   register(moduleName: string, moduleProperties: MM2ModuleProperties): void;
 }
@@ -96,7 +96,7 @@ interface MM2ModuleProperties {
    */
   sendSocketNotification?(notif: string, payload?: unknown);
   /**
-   * When using a node_helper, the node helper can send your module notifications. 
+   * When using a node_helper, the node helper can send your module notifications.
    * @param notif The notification identifier.
    * @param payload The payload of a notification.
    */

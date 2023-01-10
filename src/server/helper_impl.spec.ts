@@ -11,7 +11,7 @@ jest.mock('./processing/custom-processor', () => ({
 }));
 
 import * as impl from './helper_impl';
-import { MM2Helper } from './types/mm2'
+import { MM2Helper } from './types/mm2';
 
 const nodeHelper = impl as MM2Helper;
 
@@ -24,8 +24,8 @@ describe('MM2 helper implementation', () => {
       // then
       expect(nodeHelper.started).toBe(false);
     });
-  });  
-  
+  });
+
   describe('socketNotificationReceived function', () => {
     beforeEach(() => {
       mockStartProcessing.mockReset();
@@ -37,8 +37,8 @@ describe('MM2 helper implementation', () => {
 
       // then
       expect(mockStartProcessing).not.toHaveBeenCalled();
-    });    
-    
+    });
+
     it('should register config when notif is SET_CONFIG', () => {
       // given
       const sendSocketNotificationMock = jest.fn();

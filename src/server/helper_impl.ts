@@ -1,7 +1,4 @@
-import {
-  NOTIF_INIT,
-  NOTIF_SET_CONFIG,
-} from '../support/notifications';
+import { NOTIF_INIT, NOTIF_SET_CONFIG } from '../support/notifications';
 import { MM2Helper } from './types/mm2';
 import { startProcessing } from './processing/custom-processor';
 
@@ -10,11 +7,11 @@ import { startProcessing } from './processing/custom-processor';
  * Custom NodeHelper implementation
  */
 const mm2Helper: MM2Helper = {
-  start: function() {
+  start: function () {
     this.started = false;
   },
 
-  socketNotificationReceived: function(notification: string, payload: object) {
+  socketNotificationReceived: function (notification: string, payload: object) {
     if (notification === NOTIF_SET_CONFIG && !this.started) {
       this.config = payload;
       this.started = true;

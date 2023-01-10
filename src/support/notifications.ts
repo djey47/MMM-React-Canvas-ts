@@ -11,4 +11,4 @@ export const NOTIF_SET_CONFIG = 'SET_CONFIG';
  * MM2 Internal notifications
  */
 
-export const  NOTIF_DOM_OBJECTS_CREATED = 'DOM_OBJECTS_CREATED';
+export const NOTIF_DOM_OBJECTS_CREATED = 'DOM_OBJECTS_CREATED';

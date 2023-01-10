@@ -1,4 +1,4 @@
-import React, { ComponentType, useState } from "react";
+import React, { ComponentType, useState } from 'react';
 
 /**
  * Provides a React HOC to provide a gateway between MM2 notifications and components.
@@ -8,32 +8,38 @@ import React, { ComponentType, useState } from "react";
  * @param WrappedComponent component which will be enhanced with notification data
  * @param subscribed list of notification codes to store and relay payload data from
  */
-export function withNotifications<P>(WrappedComponent: ComponentType<P>, subscribed: string[]): ComponentType<P> {
+export function withNotifications<P>(
+  WrappedComponent: ComponentType<P>,
+  subscribed: string[]
+): ComponentType<P> {
   const EnhancedComponent: ComponentType<P> = (props: P) => {
     const [data, setData] = useState({});
 
-    NotificationCatcher.getInstance().switchHandler(handleNotificationReceived, subscribed);
+    NotificationCatcher.getInstance().switchHandler(
+      handleNotificationReceived,
+      subscribed
+    );
 
     function handleNotificationReceived(notif: string, payload?: unknown) {
       const dataKey = `data_${notif}`;
       setData({
         ...data,
         [dataKey]: payload || {},
-      })
+      });
     }
 
     const enhancedPropsWithNotificationData = {
       ...props,
       ...data,
     };
-    return <WrappedComponent {...enhancedPropsWithNotificationData} />
+    return <WrappedComponent {...enhancedPropsWithNotificationData} />;
   };
 
   return EnhancedComponent;
 }
 
 export interface NotificationCatcherOptions {
-  isDebugMode?: boolean,
+  isDebugMode?: boolean;
 }
 
 /**
@@ -45,7 +51,7 @@ export interface NotificationCatcherOptions {
  */
 export class NotificationCatcher {
   static instance?: NotificationCatcher = undefined;
-  notificationHandler: (n:  string, p?: unknown) => void;
+  notificationHandler: (n: string, p?: unknown) => void;
   subscribedNotifications: string[];
   isInitialized: boolean;
   options: NotificationCatcherOptions;
@@ -59,7 +65,9 @@ export class NotificationCatcher {
       ...options,
     };
 
-    Log.log('**** with-notifications: Notification catcher ready for initialization');
+    Log.log(
+      '**** with-notifications: Notification catcher ready for initialization'
+    );
   }
 
   /**
@@ -84,7 +92,10 @@ export class NotificationCatcher {
    * @param handler relay function to be invoked on subscribed notification received
    * @param subscribed list of notification codes to store and relay payload data from ('*' will relay everything)
    */
-  public switchHandler(handler: (n:  string, p?: unknown) => void, subscribed: string[]) {
+  public switchHandler(
+    handler: (n: string, p?: unknown) => void,
+    subscribed: string[]
+  ) {
     if (handler == this.notificationHandler) {
       return;
     }
@@ -92,7 +103,9 @@ export class NotificationCatcher {
     this.notificationHandler = handler;
     this.subscribedNotifications = subscribed;
 
-    this.debugLog(`Notification catcher switched to handler ${handler} for ${subscribed}`);
+    this.debugLog(
+      `Notification catcher switched to handler ${handler} for ${subscribed}`
+    );
   }
 
   /**
@@ -104,21 +117,30 @@ export class NotificationCatcher {
    * @param payload notification contents, eventually
    */
   public catchNotification(notif: string, payload?: unknown) {
-    if (this.subscribedNotifications.includes('*') || this.subscribedNotifications.includes(notif)) {
-      this.debugLog(`Notification catcher relaying notification {${notif}:${payload}}`);
+    if (
+      this.subscribedNotifications.includes('*') ||
+      this.subscribedNotifications.includes(notif)
+    ) {
+      this.debugLog(
+        `Notification catcher relaying notification {${notif}:${payload}}`
+      );
 
       this.notificationHandler(notif, payload);
     } else {
-      this.debugLog(`Notification catcher rejecting notification without subscription {${notif}:${payload}}`);
+      this.debugLog(
+        `Notification catcher rejecting notification without subscription {${notif}:${payload}}`
+      );
     }
   }
 
   private defaultHandler(n: string, p?: unknown) {
-    this.debugLog(`Notification catcher processing notification with default handler {${n}:${p}}`);
+    this.debugLog(
+      `Notification catcher processing notification with default handler {${n}:${p}}`
+    );
   }
 
   private debugLog(message: string) {
-    if(this.options.isDebugMode) {
+    if (this.options.isDebugMode) {
       Log.log(`**** with-notifications: ${message}`);
     }
   }

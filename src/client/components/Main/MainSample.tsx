@@ -20,7 +20,7 @@ interface State {
  * Rename this component and associated resources to your convenience
  */
 class MainSample extends PureComponent<Props, State> {
-  static defaultProps = {}
+  static defaultProps = {};
 
   constructor(props: Props) {
     super(props);

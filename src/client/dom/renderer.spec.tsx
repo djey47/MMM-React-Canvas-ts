@@ -1,6 +1,6 @@
 /**
  * @jest-environment jsdom
-*/
+ */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 const mockReactDOMRender = jest.fn();
@@ -8,7 +8,7 @@ jest.mock('react-dom', () => ({
   render: mockReactDOMRender,
 }));
 
-import { renderMainComponent, renderWrapper } from "./renderer";
+import { renderMainComponent, renderWrapper } from './renderer';
 
 describe('MM2 module React renderer', () => {
   beforeAll(() => {

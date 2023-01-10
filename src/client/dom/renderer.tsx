@@ -29,8 +29,5 @@ export const renderMainComponent = (wrapperId: string): void => {
     return;
   }
 
-  ReactDOM.render(
-    <MainSample />,
-    rootId
-  );
+  ReactDOM.render(<MainSample />, rootId);
 };

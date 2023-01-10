@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { FunctionComponent } from "react";
+import { FunctionComponent } from 'react';
 import { act, create, ReactTestRenderer } from 'react-test-renderer';
-import { withNotifications, NotificationCatcher } from "./with-notifications";
+import { withNotifications, NotificationCatcher } from './with-notifications';
 
 describe('with-notifications HOC', () => {
   beforeAll(() => {
@@ -20,20 +20,22 @@ describe('with-notifications HOC', () => {
       // then
       const tree = create(<ActualEnhanced prop1="val1" />).toJSON();
       expect(tree).toMatchSnapshot();
-    });    
-    
+    });
+
     it('should enhance props with notification and data', () => {
       // given
       const ActualEnhanced = withNotifications(TestComponent, ['TOPIC']);
       let root: ReactTestRenderer;
       act(() => {
-        root = create(<ActualEnhanced prop1="val1" />)
-      }); 
+        root = create(<ActualEnhanced prop1="val1" />);
+      });
 
       // when
       act(() => {
-        NotificationCatcher.getInstance().catchNotification('TOPIC', { data: 1});
-        root.update(<ActualEnhanced prop1="val1" prop2="val2" />)
+        NotificationCatcher.getInstance().catchNotification('TOPIC', {
+          data: 1,
+        });
+        root.update(<ActualEnhanced prop1="val1" prop2="val2" />);
       });
 
       // then
@@ -46,13 +48,13 @@ describe('with-notifications HOC', () => {
       const ActualEnhanced = withNotifications(TestComponent, ['TOPIC']);
       let root: ReactTestRenderer;
       act(() => {
-        root = create(<ActualEnhanced prop1="val1" />)
-      }); 
+        root = create(<ActualEnhanced prop1="val1" />);
+      });
 
       // when
       act(() => {
         NotificationCatcher.getInstance().catchNotification('TOPIC');
-        root.update(<ActualEnhanced prop1="val1" prop2="val2" />)
+        root.update(<ActualEnhanced prop1="val1" prop2="val2" />);
       });
 
       // then
@@ -72,8 +74,8 @@ describe('with-notifications HOC', () => {
         expect(actual.subscribedNotifications).toEqual(['*']);
         expect(actual.options).toEqual({ isDebugMode: false });
         expect(typeof actual.notificationHandler).toBe('function');
-      });      
-      
+      });
+
       it('should init correctly with custom options', () => {
         // given-when
         const actual = new NotificationCatcher({ isDebugMode: true });
@@ -94,7 +96,7 @@ describe('with-notifications HOC', () => {
 
         // then
         expect(catcher.subscribedNotifications).toEqual(['*']);
-      }); 
+      });
 
       it('should change subscription and handler', () => {
         // given
@@ -109,12 +111,12 @@ describe('with-notifications HOC', () => {
         // then
         expect(catcher.notificationHandler).toBe(handler);
         expect(catcher.subscribedNotifications).toEqual(['TOPIC']);
-      }); 
+      });
     });
 
     describe('catchNotification method', () => {
-      const handlerMock = jest.fn()
- 
+      const handlerMock = jest.fn();
+
       beforeEach(() => {
         handlerMock.mockReset();
         getLogMock().mockReset();
@@ -130,8 +132,8 @@ describe('with-notifications HOC', () => {
 
         // then
         expect(handlerMock).not.toHaveBeenCalled();
-      });      
-      
+      });
+
       it('should invoke handler if notification matches subscription', () => {
         // given
         const catcher = new NotificationCatcher();
@@ -142,7 +144,7 @@ describe('with-notifications HOC', () => {
 
         // then
         expect(handlerMock).toHaveBeenCalledWith('NOTIF', {});
-      });      
+      });
 
       it('should invoke handler if subscription to everything', () => {
         // given
@@ -165,9 +167,11 @@ describe('with-notifications HOC', () => {
 
         // then
         expect(getLogMock()).toHaveBeenCalledTimes(1);
-        expect(getLogMock()).toHaveBeenCalledWith('**** with-notifications: Notification catcher ready for initialization');
-      });      
-      
+        expect(getLogMock()).toHaveBeenCalledWith(
+          '**** with-notifications: Notification catcher ready for initialization'
+        );
+      });
+
       it('should invoke default handler with debug mode', () => {
         // given
         const catcher = new NotificationCatcher({ isDebugMode: true });
@@ -177,9 +181,18 @@ describe('with-notifications HOC', () => {
 
         // then
         expect(getLogMock()).toHaveBeenCalledTimes(3);
-        expect(getLogMock()).toHaveBeenNthCalledWith(1, '**** with-notifications: Notification catcher ready for initialization');
-        expect(getLogMock()).toHaveBeenNthCalledWith(2, '**** with-notifications: Notification catcher relaying notification {NOTIF:[object Object]}');
-        expect(getLogMock()).toHaveBeenNthCalledWith(3, '**** with-notifications: Notification catcher processing notification with default handler {NOTIF:[object Object]}');
+        expect(getLogMock()).toHaveBeenNthCalledWith(
+          1,
+          '**** with-notifications: Notification catcher ready for initialization'
+        );
+        expect(getLogMock()).toHaveBeenNthCalledWith(
+          2,
+          '**** with-notifications: Notification catcher relaying notification {NOTIF:[object Object]}'
+        );
+        expect(getLogMock()).toHaveBeenNthCalledWith(
+          3,
+          '**** with-notifications: Notification catcher processing notification with default handler {NOTIF:[object Object]}'
+        );
       });
     });
 
@@ -192,8 +205,8 @@ describe('with-notifications HOC', () => {
       it('should return existing instance', () => {
         // given-when-then
         expect(NotificationCatcher.getInstance()).toBeDefined();
-      });      
-      
+      });
+
       it('should return existing instance updating options', () => {
         // given-when
         const actual = NotificationCatcher.getInstance({ isDebugMode: true });
@@ -211,6 +224,8 @@ interface TestComponentProps {
   data_TOPIC?: object;
 }
 
-const TestComponent: FunctionComponent<TestComponentProps> = (props: TestComponentProps) => {
-  return (<div {...props}>Test component</div>);
+const TestComponent: FunctionComponent<TestComponentProps> = (
+  props: TestComponentProps
+) => {
+  return <div {...props}>Test component</div>;
 };

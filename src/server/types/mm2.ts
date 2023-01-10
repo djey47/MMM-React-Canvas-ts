@@ -1,6 +1,6 @@
 /**
  * The node helper is able to do some backend task to support your module.
- * For every module type, only one node helper instance will be created. 
+ * For every module type, only one node helper instance will be created.
  */
 export interface MM2Helper {
   /**
