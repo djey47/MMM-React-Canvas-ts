@@ -4,10 +4,7 @@
  */
 
 import * as Notifications from '../support/notifications';
-import {
-  renderWrapper,
-  renderMainComponent,
-} from './dom/renderer';
+import { renderWrapper, renderMainComponent } from './dom/renderer';
 import { NotificationCatcher } from './hoc/with-notifications';
 
 /**
@@ -20,7 +17,7 @@ const MODULE_NAME = 'MMM-React-Canvas-ts';
  * @return DIV Wrapper identifier
  */
 const getWrapperId = (): string => {
-  return `${MODULE_NAME}Wrapper`.replace(/-/g,'');
+  return `${MODULE_NAME}Wrapper`.replace(/-/g, '');
 };
 
 /**
@@ -31,17 +28,17 @@ Module.register(MODULE_NAME, {
     debug: false,
   },
 
-  getStyles: function(): string[] {
+  getStyles: function (): string[] {
     return [
-      this.file ? this.file('styles.css') : '',      // Webpack bundle
+      this.file ? this.file('styles.css') : '', // Webpack bundle
       'font-awesome.css',
     ];
   },
 
-  start: function(): void {
+  start: function (): void {
     this.debugLog('**** Starting module:', this.name);
     this.debugLog('**** Module configuration:', JSON.stringify(this.config));
- 
+
     // Global state
     this.helperLoaded = false;
     this.viewEngineStarted = false;
@@ -56,7 +53,7 @@ Module.register(MODULE_NAME, {
     }
   },
 
-  getHeader: function(): string {
+  getHeader: function (): string {
     return 'MM2 Module Header';
   },
 
@@ -65,7 +62,7 @@ Module.register(MODULE_NAME, {
    * At first, it will create module wrapper and return it to be correctly attached to MM2 app.
    * When helper is loaded (configuration updated server-side), will start REACT engine.
    */
-  getDom: function(): HTMLDivElement | undefined {
+  getDom: function (): HTMLDivElement | undefined {
     if (this.viewEngineStarted) {
       return undefined;
     }
@@ -73,7 +70,7 @@ Module.register(MODULE_NAME, {
     return renderWrapper(wrapperId);
   },
 
-  notificationReceived: function(notification: string) {
+  notificationReceived: function (notification: string) {
     this.debugLog(`**** ${this.name}::notificationReceived:`, notification);
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
@@ -84,10 +81,17 @@ Module.register(MODULE_NAME, {
     NotificationCatcher.getInstance().catchNotification(notification);
   },
 
-  socketNotificationReceived: function(notification: string, payload: unknown): void {
-    this.debugLog(`**** ${this.name}::socketNotificationReceived:`, notification, JSON.stringify(payload, null, 2));
+  socketNotificationReceived: function (
+    notification: string,
+    payload: unknown
+  ): void {
+    this.debugLog(
+      `**** ${this.name}::socketNotificationReceived:`,
+      notification,
+      JSON.stringify(payload, null, 2)
+    );
 
-    switch(notification) {
+    switch (notification) {
       case Notifications.NOTIF_INIT:
         this.helperLoaded = true;
         break;
@@ -97,9 +101,9 @@ Module.register(MODULE_NAME, {
     NotificationCatcher.getInstance().catchNotification(notification, payload);
   },
 
-  debugLog: function(...data: unknown[]) {
+  debugLog: function (...data: unknown[]) {
     if (this.config?.debug) {
       Log.log(data);
     }
-  } 
+  },
 });
