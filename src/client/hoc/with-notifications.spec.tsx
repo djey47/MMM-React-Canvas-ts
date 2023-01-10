@@ -86,16 +86,22 @@ describe('with-notifications HOC', () => {
     });
 
     describe('switchHandler method', () => {
-      it('should not change subscription if same handler reference provided', () => {
+      beforeEach(() => {
+        getLogMock().mockReset();
+      });
+
+      it('should not change subscription if same handler reference and subscription provided', () => {
         // given
         const catcher = new NotificationCatcher();
         const defaultHandler = catcher.notificationHandler;
+        catcher.options.isDebugMode = true;
 
         // when
-        catcher.switchHandler(defaultHandler, []);
+        catcher.switchHandler(defaultHandler, ['*']);
 
         // then
-        expect(catcher.subscribedNotifications).toEqual(['*']);
+        // @ts-ignore
+        expect(global.Log.log).toHaveBeenCalledTimes(2);
       });
 
       it('should change subscription and handler', () => {

@@ -96,7 +96,7 @@ export class NotificationCatcher {
     handler: (n: string, p?: unknown) => void,
     subscribed: string[]
   ) {
-    if (handler == this.notificationHandler) {
+    if (handler.toString() === this.notificationHandler.toString() && subscribed === this.subscribedNotifications) {
       return;
     }
 
