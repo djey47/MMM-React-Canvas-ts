@@ -3,22 +3,24 @@ TODO-FIXME
 
 # TODO
 - add prettier as formatter
-- Better MM2 interface doc
-  => see https://docs.magicmirror.builders/development/core-module-file.html#module-instance-methods
 - React HOC for notifications
   [x] Basic client implementation
   [x] Helper implementation
-  - Debug logs
+  [x] Debug logs
   - Support for different handlers per subscription?
 - Helper logging to electron debug tools via socket notification
 
 # FIXME
+- MM2 integrated logger does not support varargs
+  => fix all signatures
 - Fix systematic notif handler switch
 - Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
   => migrate to create root in client part
   => update unit test in renderer
 
 # DONE
+- [x] Better MM2 interface doc
+  => see https://docs.magicmirror.builders/development/core-module-file.html#module-instance-methods
 - [x] ERROR in /home/djey/dev/perso/MMM-React-Canvas-ts/src/server/helper.ts
 ./src/server/helper.ts 8:28-41
 [tsl] ERROR in /home/djey/dev/perso/MMM-React-Canvas-ts/src/server/helper.ts(8,29)
