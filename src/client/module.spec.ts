@@ -24,11 +24,12 @@ jest.mock('./dom/renderer', () => ({
 }));
 
 const mockCatchNotification = jest.fn();
+const mockCatcherGetInstance = jest.fn(() => ({
+  catchNotification: mockCatchNotification,
+}));
 jest.mock('./hoc/with-notifications', () => ({
   NotificationCatcher: {
-    getInstance: () => ({
-      catchNotification: mockCatchNotification,
-    }),
+    getInstance: mockCatcherGetInstance,
   },
 }));
 
@@ -73,6 +74,7 @@ describe('MM2 Module client', () => {
   describe('start overriden function', () => {
     beforeEach(() => {
       sendSocketNotificationMock.mockReset();
+      mockCatcherGetInstance.mockClear();
     });
 
     it('should set global state and perform initializations', () => {
@@ -86,6 +88,21 @@ describe('MM2 Module client', () => {
       expect(implementation.helperLoaded).toBe(false);
       expect(implementation.viewEngineStarted).toBe(false);
       expect(sendSocketNotificationMock).toHaveBeenCalledWith('SET_CONFIG', { debug: false });
+      expect(mockCatcherGetInstance).toHaveBeenCalledWith({ isDebugMode: false });
+    });
+
+    it('should set Catcher options to debug mode when proper config', () => {
+      // given
+      const { implementation } = checkAndExtractRegistration(mockModuleRegister.mock.lastCall);
+      if(implementation.config) {
+        implementation.config.debug = true;
+      }
+
+      // when
+      implementation.start();
+
+      // then
+      expect(mockCatcherGetInstance).toHaveBeenCalledWith({ isDebugMode: true });
     });
   });
 

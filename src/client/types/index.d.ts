@@ -112,4 +112,9 @@ interface MM2ModuleProperties {
    * Indicates if the React view engine is started and ready to render components.
    */
   viewEngineStarted?: boolean;
+  /**
+   * React Canvas additional property for internal use.
+   * Writes data via the embedded logger only if debug mode is enabled.
+   */
+  debugLog(...data: unknown[]): void;
 }

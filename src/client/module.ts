@@ -39,17 +39,18 @@ Module.register(MODULE_NAME, {
   },
 
   start: function(): void {
-    Log.info(`**Starting module: ${this.name}`);
-    Log.info(`**Module configuration: ${JSON.stringify(this.config)}`);
-
+    this.debugLog('**** Starting module:', this.name);
+    this.debugLog('**** Module configuration:', JSON.stringify(this.config));
+ 
     // Global state
     this.helperLoaded = false;
     this.viewEngineStarted = false;
 
-    Log.info('**Starting up notification catcher...');
-    NotificationCatcher.getInstance();
+    const isDebugMode = !!this.config?.debug;
+    NotificationCatcher.getInstance({ isDebugMode });
 
-    Log.info('**Sending configuration to helper...');
+    this.debugLog('**** Sending configuration to helper...');
+
     if (this.sendSocketNotification) {
       this.sendSocketNotification(Notifications.NOTIF_SET_CONFIG, this.config);
     }
@@ -73,9 +74,7 @@ Module.register(MODULE_NAME, {
   },
 
   notificationReceived: function(notification: string) {
-    if (this.config?.debug) {
-      Log.info(`**${this.name} notificationReceived: ${notification}`);
-    }
+    this.debugLog(`**** ${this.name}::notificationReceived:`, notification);
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
       renderMainComponent(getWrapperId());
@@ -86,10 +85,7 @@ Module.register(MODULE_NAME, {
   },
 
   socketNotificationReceived: function(notification: string, payload: unknown): void {
-    if (this.config?.debug) {
-      Log.info(`**${this.name} socketNotificationReceived: ${notification}`);
-      Log.info(`**${this.name} socketNotificationReceived: ${JSON.stringify(payload, null, 2)}`);
-    }
+    this.debugLog(`**** ${this.name}::socketNotificationReceived:`, notification, JSON.stringify(payload, null, 2));
 
     switch(notification) {
       case Notifications.NOTIF_INIT:
@@ -100,4 +96,10 @@ Module.register(MODULE_NAME, {
 
     NotificationCatcher.getInstance().catchNotification(notification, payload);
   },
+
+  debugLog: function(...data: unknown[]) {
+    if (this.config?.debug) {
+      Log.log(data);
+    }
+  } 
 });
