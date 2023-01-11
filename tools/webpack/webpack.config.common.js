@@ -19,6 +19,6 @@ module.exports = {
   ],
   commonPlugins: [],
   resolve: {
-    extensions: ['.tsx', '.ts'],
+    extensions: ['.tsx', '.ts', '.js'],
   }
 };
