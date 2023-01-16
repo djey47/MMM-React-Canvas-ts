@@ -22,4 +22,4 @@ const SubscribedSample: ComponentType<WithNotificationDataProps> = (
   );
 };
 
-export default withNotifications(SubscribedSample, ['*']);
+export default withNotifications(SubscribedSample, ['NOTIF']);
