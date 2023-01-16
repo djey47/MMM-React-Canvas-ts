@@ -1,6 +1,6 @@
 {
   "name": "MMM-React-Canvas-ts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "MagicMirror2 module template using React library and Typescript",
   "main": "index.js",
   "scripts": {
