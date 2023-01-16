@@ -18,8 +18,10 @@ For modern, safer language features with type checking (4.9.4)
 ### Full React support
 To make UI creation lots easier and fun (18.2.0)
 
+**MM2 notifications integration**: now possible to get your components subscribed to particular notifications and thus receive their data via props
+
 ### SASS preprocessor support
-Same goal as previous one (.scss files)
+To make UI creation lots easier and fun (.scss files)
 
 ## Useful toolings
 
