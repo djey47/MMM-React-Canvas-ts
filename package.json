@@ -20,7 +20,8 @@
     "build:helper": "webpack --mode=development --config tools/webpack/webpack.config.helper.js",
     "build:helper-prod": "webpack --mode=production --config tools/webpack/webpack.config.helper.js",
     "prettier:write": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "prettier:check": "prettier --check .",
+    "dev": "chokidar \"./src/**/*\" \"./support/**/*\" \"./tools/webpack/*\" -i \"./**/*.spec.*\" -c \"npm run build:client\""
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "app-root-dir": "1.0.2",
+    "chokidar-cli": "3.0.0",
     "css-loader": "6.7.3",
     "edit-json-file": "1.7.0",
     "eslint": "8.30.0",

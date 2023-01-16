@@ -19,11 +19,11 @@ For modern, safer language features with type checking (4.9.4)
 To make UI creation lots easier and fun (18.2.0)
 
 ### SASS preprocessor support
-(.scss files)
+Same goal as previous one (.scss files)
 
 ## Useful toolings
 
-### Module / helper builds, in development and production
+### Module / helper builds, in development and production (optimized)
 Handled by Webpack: `npm run build` or `npm run build-prod`
 
 ### Code linting
@@ -36,6 +36,11 @@ Provides ESLint, Stylelint checks: `npm run lint`
 
 ### Unit tests
 `npm test` or `npm run test:watch` (for interactive mode)
+
+### Development with auto-rebuild
+*for client side*
+
+`npm run dev` will watch for changes and automatically issue a module bundle rebuild
 
 # Install in 10 steps
 
@@ -50,3 +55,16 @@ Provides ESLint, Stylelint checks: `npm run lint`
 8. Check that `MMM-YOUR-MODULE.js`, `styles.css` and `node_helper.js` files have been created into current folder
 9. Create symbolic link from `/modules/` inside your MagicMirror folder, to module repository directory: e.g `ln -s ~/dev/MMM-YOUR-MODULE/`
 10. Add the module to MagicMirror config.
+
+# Developing your own module
+
+First of all, start MagicMirror; you might want to update default MM2 configuration to allow connecting to mirror front-end from your development PC. This will provide you better tooling compared to electron, with the ability to install popular extensions as *React Developer Tools*.
+
+- **Manual way (client, helper)**: when changes have been made on module code, run `npm run build:module` to generate bundles for both client and helper sides.
+
+- **Watch mode (client only)**: by using `npm run dev`, any change on client side files will issue a bundle rebuild; it's particularly useful when developing React components.
+
+And finally reload MM2 front-end in your browser or electron (F5, CTRL+R...).
+
+## Note about Node helper reloading
+MM2 does not handle reloading of the `node_helper.js` file alone, so no change on it will be taken into account unless MM2 is restarted. A solution would be to use PM2 (or similar) to trigger a restart. See [one of related issues](https://github.com/MichMich/MagicMirror/issues/549).
