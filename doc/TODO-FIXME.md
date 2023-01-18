@@ -2,6 +2,9 @@ TODO-FIXME
 ==========
 
 # TODO
+- Provide module configuration to Main component
+  => (see MMM-LKY-TIC implementation)
+  => Use React Context??
 - React HOC for notifications:
   [x] Basic client implementation
   [x] Helper implementation
