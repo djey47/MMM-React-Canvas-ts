@@ -14,7 +14,7 @@ describe('Subscribed component', () => {
     const tree = renderer.create(<Subscribed prop1="val1" />).toJSON();
     expect(tree).toMatchSnapshot();
     expect(mockWithNotifications).toHaveBeenCalled();
-    expect(mockWithNotifications.mock.calls[0][1]).toEqual(['*']);
+    expect(mockWithNotifications.mock.calls[0][1]).toEqual(['NOTIF']);
   });
 
   it('should render correctly with notif data', () => {
