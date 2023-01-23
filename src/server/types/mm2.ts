@@ -35,4 +35,10 @@ export interface MM2Helper {
    * Indicates if the helper is started with the configuration ready.
    */
   started?: boolean;
+  /**
+   * This method is called when the MagicMirror server receives a SIGINT command and is shutting down.
+   * This method should include any commands needed to close any open connections,
+   * stop any sub-processes and gracefully exit the module.
+   */
+  stop(): void;
 }

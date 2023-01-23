@@ -23,6 +23,10 @@ const mm2Helper: MM2Helper = {
       startProcessing(this);
     }
   },
+  
+  stop: function (): void {
+    // TODO add cleaning and termination code here...
+  }
 };
 
 module.exports = mm2Helper;
