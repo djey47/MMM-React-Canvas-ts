@@ -54,4 +54,11 @@ describe('MM2 helper implementation', () => {
       expect(mockStartProcessing).toHaveBeenCalledWith(nodeHelper);
     });
   });
+
+  describe('stop function', () => {
+    it('should do nothing by default', () => {
+      // given-when-then
+      nodeHelper.stop();
+    });
+  });
 });
