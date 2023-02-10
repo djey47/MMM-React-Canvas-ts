@@ -1,10 +1,11 @@
-import { PureComponent } from 'react';
+import { PureComponent, useContext } from 'react';
 import classnames from 'classnames';
 import Subscribed from '../Subscribed/Subscribed';
 
 import '../../styles/reset.scss';
 import '../../styles/module.scss';
 import './MainSample.scss';
+import ConfigurationContext from '../../contexts/ConfigurationContext';
 
 interface Props {
   oneProp?: string;
@@ -31,12 +32,24 @@ class MainSample extends PureComponent<Props, State> {
    */
   render() {
     return (
-      <div className={classnames('main-sample', 'dimmed', 'light', 'small')}>
-        <p className="main-sample__description">
-          Main component sample for MM2's React-Typescript template
-        </p>
-        <Subscribed prop1="text" />
-      </div>
+      <ConfigurationContext.Consumer>
+        {(configuration) => (
+          <div className={classnames('main-sample', 'dimmed', 'light', 'small')}>
+            <p className="main-sample__description">
+              Main component sample for MM2's React-Typescript template
+            </p>
+            <p className="main-sample__configuration">
+              Configuration in context:
+              <pre>
+                <code>
+                  {JSON.stringify(configuration)}
+                </code>
+              </pre>
+            </p>
+            <Subscribed prop1="text" />
+          </div>
+        )}
+      </ConfigurationContext.Consumer>
     );
   }
 }

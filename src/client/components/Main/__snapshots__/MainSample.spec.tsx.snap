@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MainSample component should render correctly with configuration context 1`] = `
+<div
+  className="main-sample dimmed light small"
+>
+  <p
+    className="main-sample__description"
+  >
+    Main component sample for MM2's React-Typescript template
+  </p>
+  <p
+    className="main-sample__configuration"
+  >
+    Configuration in context:
+    <pre>
+      <code>
+        {"debug":true}
+      </code>
+    </pre>
+  </p>
+  <div
+    prop1="text"
+  >
+    Subscribed component
+  </div>
+</div>
+`;
+
 exports[`MainSample component should render correctly with default props 1`] = `
 <div
   className="main-sample dimmed light small"
@@ -8,6 +35,16 @@ exports[`MainSample component should render correctly with default props 1`] = `
     className="main-sample__description"
   >
     Main component sample for MM2's React-Typescript template
+  </p>
+  <p
+    className="main-sample__configuration"
+  >
+    Configuration in context:
+    <pre>
+      <code>
+        {}
+      </code>
+    </pre>
   </p>
   <div
     prop1="text"

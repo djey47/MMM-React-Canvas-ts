@@ -226,7 +226,7 @@ describe('MM2 Module client', () => {
       // then
       expect(implementation.viewEngineStarted).toBe(true);
       expect(mockRenderMainComponent).toHaveBeenCalledWith(
-        'MMMReactCanvastsWrapper'
+        'MMMReactCanvastsWrapper', { debug: false }
       );
       expect(mockCatchNotification).toHaveBeenCalledWith('DOM_OBJECTS_CREATED');
     });

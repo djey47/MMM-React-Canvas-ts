@@ -26,6 +26,13 @@ interface MM2ModuleHelper {
 }
 
 /**
+ * @see ModuleConfiguration interface in ../../shared/domain/module-config.ts
+ */
+interface ModuleConfiguration {
+  debug?: boolean;
+};
+
+/**
  * @see https://docs.magicmirror.builders/development/core-module-file.html#available-module-instance-properties
  */
 interface MM2ModuleProperties {

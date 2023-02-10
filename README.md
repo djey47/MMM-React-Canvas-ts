@@ -10,23 +10,30 @@ MichMich's MagicMirror2 module template for convenient development with Typescri
 
 ## Highlights
 
-Requires node v18 or higher.
+### Technical
 
-### Typescript support
-For modern, safer language features with type checking (4.9.4)
+- **Node-js based**: requires node v18 or higher; heavily relies on NPM
 
-### Full React support
-To make UI creation lots easier and fun (18.2.0)
+- **Typescript support**: for modern, safer language features with type checking (4.9.4). Required MM2 typings included
 
-**MM2 notifications integration**: now possible to get your components subscribed to particular notifications and thus receive their data via props
+- **Full React support with SASS preprocessor support**: to make UI creation lots easier and fun (18.2.0).
 
-### SASS preprocessor support
-To make UI creation lots easier and fun (.scss files)
+### MagicMirror features integration and enhancements
+
+- **Configuration**: module configuration is accessible to any component via React Context provider
+
+- **Notifications**: makes it possible to get your client components subscribed to particular MM2 notifications and thus receive their data via props
+
+- **Logging**: provides method to log only in debug mode for development-related messages (client side only for now)
+
+- **Helper lifecycle hooks**: allows to interact with some MM2 module helper lifecycle methods, as `socketNotificationReceived`, `start`, `stop`. 
 
 ## Useful toolings
 
 ### Module / helper builds, in development and production (optimized)
-Handled by Webpack: `npm run build` or `npm run build-prod`
+Handled by Webpack:
+- `npm run build` for a development bundle
+- `npm run build-prod` for a production-optimized bundle
 
 ### Code linting
 Provides ESLint, Stylelint checks: `npm run lint`
@@ -34,10 +41,12 @@ Provides ESLint, Stylelint checks: `npm run lint`
 ### Code formatter
 *for ts/tsx files only*
 
-`npm run prettier:check` (preview) and `npm run prettier:write` (to process reformatting)
+- `npm run prettier:check` (preview)
+- `npm run prettier:write` (to process reformatting)
 
 ### Unit tests
-`npm test` or `npm run test:watch` (for interactive mode)
+- `npm test`
+- `npm run test:watch` (for interactive mode)
 
 ### Development with auto-rebuild
 *for client side*

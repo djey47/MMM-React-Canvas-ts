@@ -74,7 +74,7 @@ Module.register(MODULE_NAME, {
     this.debugLog(`**** ${this.name}::notificationReceived: ${notification}`);
 
     if (notification === Notifications.NOTIF_DOM_OBJECTS_CREATED) {
-      renderMainComponent(getWrapperId());
+      renderMainComponent(getWrapperId(), this.config);
       this.viewEngineStarted = true;
     }
 
