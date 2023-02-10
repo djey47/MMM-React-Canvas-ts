@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const ConfigurationContext = createContext<ModuleConfiguration | undefined>({});
 export default ConfigurationContext;
