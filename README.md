@@ -1,6 +1,6 @@
 # MMM-React-Canvas-ts
 [ ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit)
-[![Codeship Status for djey47/MMM-React-Canvas-ts](https://app.codeship.com/projects/0a18b0a8-549a-4dc0-90ba-8c4a4da16876/status?branch=master)](https://app.codeship.com/projects/462045)
+![Build status](https://github.com/djey47/MMM-React-Canvas-ts/actions/workflows/ci.yml/badge.svg?branch=main&event=push)
 
 MichMich's MagicMirror2 module template for convenient development with Typescript language and React library.
 
