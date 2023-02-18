@@ -1,11 +1,11 @@
-import { PureComponent, useContext } from 'react';
 import classnames from 'classnames';
+import { PureComponent } from 'react';
+import ConfigurationContext from '../../contexts/ConfigurationContext';
 import Subscribed from '../Subscribed/Subscribed';
 
-import '../../styles/reset.scss';
 import '../../styles/module.scss';
+import '../../styles/reset.scss';
 import './MainSample.scss';
-import ConfigurationContext from '../../contexts/ConfigurationContext';
 
 interface Props {
   oneProp?: string;

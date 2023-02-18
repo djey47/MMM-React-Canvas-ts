@@ -10,6 +10,12 @@ exports[`Subscribed component should render correctly with notif data 1`] = `
     Subscribed component to 'NOTIF' event
   </p>
   <p
+    className="subscribed__props"
+  >
+    Own props: 
+    {"prop1":"val1"}
+  </p>
+  <p
     className="subscribed__value"
   >
     Last received value: 
@@ -26,6 +32,12 @@ exports[`Subscribed component should render correctly without notif data 1`] = `
     className="subscribed__text"
   >
     Subscribed component to 'NOTIF' event
+  </p>
+  <p
+    className="subscribed__props"
+  >
+    Own props: 
+    {"prop1":"val1"}
   </p>
   <p
     className="subscribed__value"

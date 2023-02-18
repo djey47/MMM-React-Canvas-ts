@@ -27,7 +27,7 @@ const mockCatchNotification = jest.fn();
 const mockCatcherGetInstance = jest.fn(() => ({
   catchNotification: mockCatchNotification,
 }));
-jest.mock('./hoc/with-notifications', () => ({
+jest.mock('./hooks/with-notifications/notification-catcher', () => ({
   NotificationCatcher: {
     getInstance: mockCatcherGetInstance,
   },
