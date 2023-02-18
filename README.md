@@ -22,7 +22,7 @@ MichMich's MagicMirror2 module template for convenient development with Typescri
 
 - **Configuration**: module configuration is accessible to any component via React Context provider
 
-- **Notifications**: makes it possible to get your client components subscribed to particular MM2 notifications and thus receive their data via props
+- **Notifications**: makes it possible to get your client components subscribed to particular MM2 notifications and thus receive their data via props. It uses a React hook - see `Subscribed` component to know how
 
 - **Logging**: provides method to log only in debug mode for development-related messages (client side only for now)
 
