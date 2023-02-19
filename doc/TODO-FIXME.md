@@ -2,10 +2,8 @@ TODO-FIXME
 ==========
 
 # TODO
-- Provide module configuration to Main component
-  => (see MMM-LKY-TIC implementation)
-  => Use React Context??
-- React HOC for notifications:
+- React HOC/hook for notifications:
+  [x] hoc to hook rewrite
   [x] Basic client implementation
   [x] Helper implementation
   [x] Debug logs
@@ -15,6 +13,9 @@ TODO-FIXME
 # FIXME
 
 # DONE
+- Provide module configuration to Main component
+  => (see MMM-LKY-TIC implementation)
+  => Use React Context??
 - [x] Fix systematic notif handler switch
 - [x] MM2 integrated logger does not support varargs
   => fix all signatures
