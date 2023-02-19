@@ -2,6 +2,7 @@ TODO-FIXME
 ==========
 
 # TODO
+- Create a library to be used by the template / future modules
 - React HOC/hook for notifications:
   [x] hoc to hook rewrite
   [x] Basic client implementation
