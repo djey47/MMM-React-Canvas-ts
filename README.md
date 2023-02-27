@@ -4,7 +4,7 @@
 
 MichMich's MagicMirror2 module template for convenient development with Typescript language and React library.
 
-# Presentation and features
+# Introducing and features
 
 ![ReactDevTools-Sample Component](https://github.com/djey47/MMM-React-Canvas-ts/raw/master/doc/ReactDevTools-Sample%20Component.png)
 
